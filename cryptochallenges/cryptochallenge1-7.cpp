@@ -159,19 +159,34 @@ std::string hexXor(std::string in1, std::string in2){
     std::string t2;
     std::string t3="";
     
-    t1 = pack(in1);
-    t2 = pack (in2);
+    //t1 = pack(in1);
+    //t2 = pack(in2);
     
-    for (int i=0; i<t1.length();i++){
-        t3+=bitXor(t1[i], t2[i]);
+    for (int i=0; i<in1.length();i++){
+        t3+=bitXor(in1[i], in2[i]);
     }
+    //return (t3);
     return (unpack(t3));
 }
 
 
-std::string extendString(std::string in, int length){
-    
-    return (in);
+std::string extendString(char in, int length){
+    std::string out="";
+    for (int i=0; i<length; i++){
+        out+=in;
+    }
+    return (out);
 }
-
-
+int nonChars(std::string s){
+    int j=0;
+    for (int i=0;i<s.length();i++){
+        if (!(((s[i]>'A') & (s[i]<'Z')) | ((s[i]>'a') & (s[i]<'z')))){
+            j++;
+        }
+    }
+    return(j);
+}
+int englishText(std::string s){//returns a 1-10 score for a piece of plain text for its closeness to english text
+    if (nonChars(s)>(.3*s.length())){return 0;} // if there are more than 30% non a-z characters, it's not an english sentence
+    else {return 10;}
+}

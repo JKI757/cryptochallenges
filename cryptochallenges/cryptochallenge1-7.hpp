@@ -40,7 +40,8 @@ std::string hexXor(std::string in1, std::string in2);
 
 // challenge 3
 
-std::string extendString(std::string in, int length);
+std::string extendString(char in, int length);
 
+int englishText(std::string s);
 
 #endif /* cryptochallenge1_7_hpp */
