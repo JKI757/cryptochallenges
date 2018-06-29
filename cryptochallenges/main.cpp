@@ -199,9 +199,19 @@ the same 16 byte ciphertext.
 // ------------------------------------------------------------
 
  */
+//
+//  main.cpp
+//  crypto_challenge
+//
+//  Created by josh on 5/3/13.
+//  Copyright (c) 2013 josh. All rights reserved.
+//
 
 #include <iostream>
+#include <fstream>
 #include <cstddef>
+#include <cstdio>
+#include <cstdlib>
 
 #include "cryptochallenge1-7.hpp"
 
@@ -249,7 +259,21 @@ int main(int argc, const char * argv[])
         }
     }
 
-    cout <<"solution is: " << tempSoln << "with a score of " << tempHighScore <<endl;
+    cout <<"solution is: " << tempSoln << " with a score of " << tempHighScore <<endl;
+    cout <<"End Challenge 3" << endl ;
     
+    cout << "start challenge 4" << endl;
+    
+    std::ifstream fin("/Users/josh/Documents/Code/CryptoChallenges/crypto_challenges/crypto_challenges/cc/cc/input.txt");
+    for (std::string line; getline(fin,line);){
+        //cout << line << endl;
+        cout << (singleXorTest((line)))<<endl;
+    }
+    
+    std::cout << "challenge 4 solution: " << endl <<
+    
+    "7b5a4215415d544115415d5015455447414c155c46155f4058455c5b523f" << endl <<
+    "Now that the party is jumping" << endl;
     return 0;
 }
+

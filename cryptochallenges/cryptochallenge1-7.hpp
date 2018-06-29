@@ -44,4 +44,10 @@ std::string extendString(char in, int length);
 
 int englishText(std::string s);
 
+
+
+//challenge 4
+std::string singleXorTest(std::string in);
+
+
 #endif /* cryptochallenge1_7_hpp */

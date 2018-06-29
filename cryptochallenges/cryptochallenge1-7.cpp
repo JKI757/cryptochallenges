@@ -180,13 +180,67 @@ std::string extendString(char in, int length){
 int nonChars(std::string s){
     int j=0;
     for (int i=0;i<s.length();i++){
-        if (!(((s[i]>'A') & (s[i]<'Z')) | ((s[i]>'a') & (s[i]<'z')))){
+        if (!(((s[i]>'A') & (s[i]<'Z')) | ((s[i]>'a') & (s[i]<'z')) | (s[i] == ' '))){
             j++;
         }
     }
     return(j);
 }
+
+int nonPrintChars(std::string s){
+    int j=0;
+    for (int i=0; i<s.length(); i++){
+        if (s[i]<0x20){j++;}
+    }
+    return(j);
+}
 int englishText(std::string s){//returns a 1-10 score for a piece of plain text for its closeness to english text
-    if (nonChars(s)>(.3*s.length())){return 0;} // if there are more than 30% non a-z characters, it's not an english sentence
-    else {return 10;}
+    int i=0; int j=50;
+    bool nonPrintables=false;
+    bool nonCharacters=false;
+    bool badFreqCount=false;
+    if (nonChars(s)>(.2*(double)s.length())){nonCharacters=true;} // if there are more than 30% non a-z characters, it's not an english sentence
+    if (nonPrintChars(s)>(.2*s.length())){nonPrintables=true;}
+    
+    i+=(int)count(s.begin(),s.end(),'r');
+    i+=(int)count(s.begin(),s.end(),'R');
+    i+=(int)count(s.begin(),s.end(),'s');
+    i+=(int)count(s.begin(),s.end(),'S');
+    i+=(int)count(s.begin(),s.end(),'t');
+    i+=(int)count(s.begin(),s.end(),'T');
+    i+=(int)count(s.begin(),s.end(),'l');
+    i+=(int)count(s.begin(),s.end(),'L');
+    i+=(int)count(s.begin(),s.end(),'n');
+    i+=(int)count(s.begin(),s.end(),'N');
+    i+=(int)count(s.begin(),s.end(),'e');
+    i+=(int)count(s.begin(),s.end(),'E');
+
+    if ((i < ((double)s.length()) *.3)){badFreqCount=true;}
+    
+    if (nonPrintables){return 0;}
+    if (nonCharacters){j-=30;}
+    if (badFreqCount){j-=20;};
+    
+    
+    return(j);
+}
+
+std::string singleXorTest(std::string in){
+
+    std::string temp=pack(in);
+    std::string t="";
+    std::string s="";
+    std::string tempSoln="";
+    int tempHighScore=0;
+    for (char a='A'; a<='z';a++){
+        t = extendString(a, in.length());
+    
+        s=hexXor(temp, (t));
+        
+        if (englishText(pack(s)) > tempHighScore){
+            tempSoln=pack(s);
+            tempHighScore=englishText(pack(s));
+        }
+    }
+    return(tempSoln);
 }
