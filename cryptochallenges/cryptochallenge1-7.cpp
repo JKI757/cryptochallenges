@@ -200,7 +200,7 @@ int englishText(std::string s){//returns a 1-10 score for a piece of plain text 
     bool nonCharacters=false;
     bool badFreqCount=false;
     if (nonChars(s)>(.2*(double)s.length())){nonCharacters=true;} // if there are more than 30% non a-z characters, it's not an english sentence
-    if (nonPrintChars(s)>(.2*s.length())){nonPrintables=true;}
+    if (nonPrintChars(s)>(1)){nonPrintables=true;}
     
     i+=(int)count(s.begin(),s.end(),'r');
     i+=(int)count(s.begin(),s.end(),'R');
@@ -218,8 +218,8 @@ int englishText(std::string s){//returns a 1-10 score for a piece of plain text 
     if ((i < ((double)s.length()) *.3)){badFreqCount=true;}
     
     if (nonPrintables){return 0;}
-    if (nonCharacters){j-=30;}
-    if (badFreqCount){j-=20;};
+    if (nonCharacters){j-=40;}
+    if (badFreqCount){j-=10;};
     
     
     return(j);
@@ -235,7 +235,7 @@ std::string singleXorTest(std::string in){
     for (char a='A'; a<='z';a++){
         t = extendString(a, in.length());
     
-        s=hexXor(temp, (t));
+        s=hexXor(temp, t);
         
         if (englishText(pack(s)) > tempHighScore){
             tempSoln=pack(s);

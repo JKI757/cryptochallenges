@@ -237,37 +237,22 @@ int main(int argc, const char * argv[])
     const string c2KEY="686974207468652062756c6c277320657965";
     
     cout << (hexXor(pack(c2INPUT), pack(c2KEY))) << endl;
-    cout << "End Challenge 2"<< endl;
+    cout << "End Challenge 2"<< endl<<endl;
     
     cout << "Start Challenge 3"<<endl;
     
     const string c3INPUT = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
     
-    string temp=pack(c3INPUT);
-    string t="";
-    string s="";
-    string tempSoln="";
-    int tempHighScore=0;
-    for (char a='A'; a<='Z';a++){
-        t = extendString(a, c3INPUT.length()/2);
-    
-        s=hexXor(temp, (t));
-        
-        if (englishText(pack(s)) > tempHighScore){
-            tempSoln=pack(s);
-            tempHighScore=englishText(pack(s));
-        }
-    }
+        cout << (singleXorTest((c3INPUT)))<<endl;
 
-    cout <<"solution is: " << tempSoln << " with a score of " << tempHighScore <<endl;
-    cout <<"End Challenge 3" << endl ;
+    cout <<endl << "End Challenge 3" << endl<<endl ;
     
     cout << "start challenge 4" << endl;
     
     std::ifstream fin("/Users/josh/Documents/Code/CryptoChallenges/crypto_challenges/crypto_challenges/cc/cc/input.txt");
     for (std::string line; getline(fin,line);){
-        //cout << line << endl;
-        cout << (singleXorTest((line)))<<endl;
+        cout << line << endl;
+        cout << (singleXorTest((line)))<<endl<<endl;
     }
     
     std::cout << "challenge 4 solution: " << endl <<
