@@ -200,22 +200,55 @@ int englishText(std::string s){//returns a 1-10 score for a piece of plain text 
     bool nonCharacters=false;
     bool badFreqCount=false;
     if (nonChars(s)>(.2*(double)s.length())){nonCharacters=true;} // if there are more than 30% non a-z characters, it's not an english sentence
-    if (nonPrintChars(s)>(1)){nonPrintables=true;}
+    if (nonPrintChars(s)>((.2*s.length()))){nonPrintables=true;}
     
-    i+=(int)count(s.begin(),s.end(),'r');
-    i+=(int)count(s.begin(),s.end(),'R');
-    i+=(int)count(s.begin(),s.end(),'s');
-    i+=(int)count(s.begin(),s.end(),'S');
-    i+=(int)count(s.begin(),s.end(),'t');
-    i+=(int)count(s.begin(),s.end(),'T');
-    i+=(int)count(s.begin(),s.end(),'l');
-    i+=(int)count(s.begin(),s.end(),'L');
-    i+=(int)count(s.begin(),s.end(),'n');
-    i+=(int)count(s.begin(),s.end(),'N');
-    i+=(int)count(s.begin(),s.end(),'e');
-    i+=(int)count(s.begin(),s.end(),'E');
+    int eCount = (int)std::count(s.begin(),s.end(),'e');
+    eCount += (int)std::count(s.begin(),s.end(),'E');
+    int tCount = (int)std::count(s.begin(),s.end(),'T');
+    tCount += (int)std::count(s.begin(),s.end(),'t');
+    int aCount = (int)std::count(s.begin(),s.end(),'a');
+    aCount += (int)std::count(s.begin(),s.end(),'A');
+    int oCount = (int)std::count(s.begin(),s.end(),'o');
+    oCount += (int)std::count(s.begin(),s.end(),'O');
+    int iCount = (int)std::count(s.begin(),s.end(),'i');
+    iCount += (int)std::count(s.begin(),s.end(),'I');
+    int nCount = (int)std::count(s.begin(),s.end(),'n');
+    nCount += (int)std::count(s.begin(),s.end(),'N');    
+    int sCount = (int)std::count(s.begin(),s.end(),'s');
+    sCount += (int)std::count(s.begin(),s.end(),'S'); 
+    int rCount = (int)std::count(s.begin(),s.end(),'r');
+    rCount += (int)std::count(s.begin(),s.end(),'R');
+    
+    if ((eCount > (.09*s.length())) && (eCount < .15*s.length())){
+        j+=10;
+    }
+    if ((tCount > (.07*s.length())) && (tCount < .1*s.length())){
+        j+=10;
+    }
+    if ((tCount > (.06*s.length())) && (tCount < .08*s.length())){
+        j+=10;
+    }
+    if ((aCount > (.05*s.length())) && (aCount < .08*s.length())){
+        j+=10;
+    }
+    if ((oCount > (.05*s.length())) && (oCount < .08*s.length())){
+        j+=10;
+    }
+    if ((iCount > (.05*s.length())) && (iCount < .08*s.length())){
+        j+=10;
+    }
+    if ((nCount > (.04*s.length())) && (nCount < .07*s.length())){
+        j+=10;
+    }
+    if ((sCount > (.04*s.length())) && (sCount < .07*s.length())){
+        j+=10;
+    }
+    if ((rCount > (.04*s.length())) && (rCount < .07*s.length())){
+        j+=10;
+    }
 
-    if ((i < ((double)s.length()) *.3)){badFreqCount=true;}
+
+    if (j < 90){badFreqCount=true;}
     
     if (nonPrintables){return 0;}
     if (nonCharacters){j-=40;}
